@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm  // Fetches the repository code
+            }
+        }
+        stage('Build') {
+            steps {
+                sh './gradlew assemble'  // TODO: Ensure this works
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'  // TODO: Ensure this works
+            }
+        }
+    }
+}
