@@ -4,14 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh './gradlew assemble'  // TODO: Ensure this works
+                script {
+                    sh './gradlew assemble'  // Build the application
+                }
             }
         }
         stage('Test') {
             steps {
-                sh './gradlew test'  // TODO: Ensure this works
+                script {
+                    sh './gradlew test'  // Run tests
+                }
             }
         }
     }
 }
-
