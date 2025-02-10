@@ -49,5 +49,11 @@
   },
   "resolutions": {
     "@babel/core": "^7.26.8"
-  }
+  },
+  "engines": {
+  "node": "18.x"
+}
+
+
+
 }
