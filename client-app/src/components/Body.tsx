@@ -124,8 +124,8 @@ class Body extends React.Component<BodyProps, BodyState> {
             count={products.length}
             rowsPerPage={rowsPerPage}
             page={page}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+            onPageChange={this.handleChangePage}
+            onRowsPerPageChange={this.handleChangeRowsPerPage}
             />
         </Paper>
       </div>
