@@ -1,20 +1,39 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18' // Use official Node.js 18 Docker image
+        }
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                checkout scm  // Fetches the repository code
+                checkout scm  // Fetch repository code
             }
         }
+
+        stage('Verify Node.js') {
+            steps {
+                script {
+                    sh 'node -v'  // Check if Node.js 18 is used
+                    sh 'npm -v'   // Check npm version
+                }
+            }
+        }
+
         stage('Build') {
             steps {
-                sh './gradlew assemble'  // TODO: Ensure this works
+                script {
+                    sh './gradlew assemble'  // Build the application
+                }
             }
         }
+
         stage('Test') {
             steps {
-                sh './gradlew test'  // TODO: Ensure this works
+                script {
+                    sh './gradlew test'  // Run tests
+                }
             }
         }
     }
