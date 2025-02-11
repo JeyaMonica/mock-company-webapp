@@ -2,38 +2,15 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
-                sh './gradlew build'
+                sh './gradlew assemble'  // TODO: Build the application
             }
         }
-
         stage('Test') {
             steps {
-                sh './gradlew test'
+                sh './gradlew test'  // TODO: Run the tests
             }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                // Add deployment steps here
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline executed successfully ✅'
-        }
-        failure {
-            echo 'Pipeline failed ❌'
         }
     }
 }
