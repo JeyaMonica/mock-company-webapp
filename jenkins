@@ -1,45 +1,59 @@
 pipeline {
     agent any
+
     tools {
-        maven 'Maven 3.9.9'
-    } // Runs on any available Jenkins agent
+        maven 'Maven 3.9.9'  // Ensure this matches the Maven version in Jenkins
+          // Ensure Java 8 is configured in Jenkins
+    }
+
+    environment {
+        MAVEN_OPTS = "-Dmaven.repo.local=.m2/repository"
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Cloning the repository
-                git 'https://github.com/JeyaMonica/mock-company-webapp.git'
+                script {
+                    echo 'Checking out source code...'
+                }
+                checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                sh 'mvn clean install'  // Run Maven build
+                script {
+                    echo 'Building the application...'
+                }
+                sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'mvn test'  // Run unit tests
+                script {
+                    echo 'Running tests...'
+                }
+                sh 'mvn test'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
-                // Deployment steps (if needed)
+                script {
+                    echo 'Deploying application...'
+                }
+                // Add deployment steps here if needed
             }
         }
-    }
+    } // Ensure this closing brace is present
 
     post {
         success {
-            echo 'Pipeline completed successfully! 🎉'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed! ❌'
+            echo 'Pipeline failed ❌'
         }
     }
-}
+} // This closing brace was likely missing
